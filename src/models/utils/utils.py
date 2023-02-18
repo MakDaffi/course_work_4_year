@@ -1,4 +1,5 @@
 import pandas as pd
+from tqdm import tqdm
 
 def train_test_split(transactions, items, users, date):
     all_data = transactions.merge(users, on='customer_id', how='inner').merge(items, on='article_id', how='inner')
@@ -20,5 +21,8 @@ def apk(y_true, y_pred, k):
     return count / k
 
 def get_y_true(users, df):
-    dct = {i: df.loc[df.customer_id == i].article_id.to_list() for i in users}
+    dct = {i:[] for i in users}
+    for k, v in df[['customer_id', 'article_id']].groupby(['customer_id', 'article_id']).size().items():
+        for _ in range(v):
+            dct[k[0]].append(k[1])
     return dct
