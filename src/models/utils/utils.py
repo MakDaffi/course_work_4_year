@@ -1,5 +1,35 @@
 import pandas as pd
+import numpy as np
 from tqdm import tqdm
+from scipy.sparse import csr_matrix
+
+
+class model:
+    def __init__(self, transactions, model):
+        transactions["uid"] = transactions["customer_id"].astype("category")
+        transactions["uid"] = transactions["uid"].cat.codes
+
+        transactions["iid"] = transactions["article_id"].astype("category")
+        transactions["iid"] = transactions["iid"].cat.codes
+        
+        self.iid_to_item_id = transactions[["iid", "article_id"]].drop_duplicates().set_index("iid").to_dict()["article_id"]
+        self.item_id_to_iid = transactions[["iid", "article_id"]].drop_duplicates().set_index("article_id").to_dict()["iid"]
+
+        self.uid_to_user_id = transactions[["uid", "customer_id"]].drop_duplicates().set_index("uid").to_dict()["customer_id"]
+        self.user_id_to_uid = transactions[["uid", "customer_id"]].drop_duplicates().set_index("customer_id").to_dict()["uid"]
+
+        indptr = []
+        indices = []
+        data = []
+
+        for i,j in transactions[['uid', 'iid']].groupby(['uid', 'iid']).size().items():
+            indptr.append(i[0])
+            indices.append(i[1])
+            data.append(j)
+
+        self.user_items = csr_matrix((np.array(data).astype(float), (np.array(indptr), np.array(indices))))
+        self.item_users = csr_matrix((np.array(data).astype(float), (np.array(indices), np.array(indptr))))
+        self.model = model
 
 def train_test_split(transactions, items, users, date):
     all_data = transactions.merge(users, on='customer_id', how='inner').merge(items, on='article_id', how='inner')

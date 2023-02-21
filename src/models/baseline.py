@@ -1,7 +1,7 @@
 import pandas as pd
 import utils.utils as utls
 
-def recomend_popular(train, n):
+def recommend_popular(train, n):
     recomnd = []
     for i, _ in train.groupby('article_id').size().nlargest(n).items():
         recomnd.append(i)
@@ -19,17 +19,17 @@ if __name__ == "__main__" :
     print("-----------------------Succsses-----------------------")
     print("--------------------Training model--------------------")
     dct = utls.get_y_true(users.customer_id.unique(), validation)
-    recomend = recomend_popular(train, 12)
+    recommend = recommend_popular(train, 12)
     print("-----------------------Succsses-----------------------")
     print("-------------------Evaluation model-------------------")
     mapk = 0
     for k, v in dct.items():
-        mapk += utls.apk(v, recomend, 12)
+        mapk += utls.apk(v, recommend, 12)
     print("MAP12 on validation:", mapk / len(users.customer_id.unique()))
     print("-----------------------Succsses-----------------------")
     sub = pd.read_csv('../../data/sample_submission.csv')
     ans = '0'
-    for i in recomend:
+    for i in recommend:
         ans = ans + str(i) + ' '
     ans = ans[:len(ans) - 1]
     sub.prediction = ans
