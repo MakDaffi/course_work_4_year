@@ -1,11 +1,11 @@
 import pandas as pd
 import utils.utils as utls
 
-def recommend_popular(train, n):
-    recomnd = []
+def recommend_popular(train, n=12):
+    recommend = []
     for i, _ in train.groupby('article_id').size().nlargest(n).items():
-        recomnd.append(i)
-    return recomnd
+        recommend.append(i)
+    return recommend
 
 if __name__ == "__main__" :
     print("---------------------Loading data---------------------")
