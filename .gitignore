@@ -1,4 +1,5 @@
 data
 .DS_Store
 *_checkpoints
-src/models/experiments.ipynb
+_minted*
+*.pdf
