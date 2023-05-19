@@ -12,11 +12,15 @@ class model:
         transactions["iid"] = transactions["article_id"].astype("category")
         transactions["iid"] = transactions["iid"].cat.codes
         
-        self.iid_to_item_id = transactions[["iid", "article_id"]].drop_duplicates().set_index("iid").to_dict()["article_id"]
-        self.item_id_to_iid = transactions[["iid", "article_id"]].drop_duplicates().set_index("article_id").to_dict()["iid"]
+        self.iid_to_item_id = transactions[["iid", "article_id"]].drop_duplicates()\
+            .set_index("iid").to_dict()["article_id"]
+        self.item_id_to_iid = transactions[["iid", "article_id"]].drop_duplicates()\
+            .set_index("article_id").to_dict()["iid"]
 
-        self.uid_to_user_id = transactions[["uid", "customer_id"]].drop_duplicates().set_index("uid").to_dict()["customer_id"]
-        self.user_id_to_uid = transactions[["uid", "customer_id"]].drop_duplicates().set_index("customer_id").to_dict()["uid"]
+        self.uid_to_user_id = transactions[["uid", "customer_id"]].drop_duplicates()\
+            .set_index("uid").to_dict()["customer_id"]
+        self.user_id_to_uid = transactions[["uid", "customer_id"]].drop_duplicates()\
+            .set_index("customer_id").to_dict()["uid"]
 
         indptr = []
         indices = []
@@ -27,12 +31,15 @@ class model:
             indices.append(i[1])
             data.append(j)
 
-        self.user_items = csr_matrix((np.array(data).astype(float), (np.array(indptr), np.array(indices))))
-        self.item_users = csr_matrix((np.array(data).astype(float), (np.array(indices), np.array(indptr))))
+        self.user_items = csr_matrix((np.array(data).astype(float),
+                                      (np.array(indptr), np.array(indices))))
+        self.item_users = csr_matrix((np.array(data).astype(float),
+                                      (np.array(indices), np.array(indptr))))
         self.model = model
 
 def train_test_split(transactions, items, users, date):
-    all_data = transactions.merge(users, on='customer_id', how='inner').merge(items, on='article_id', how='inner')
+    all_data = transactions.merge(users, on='customer_id', 
+                                  how='inner').merge(items, on='article_id', how='inner')
     train = all_data.loc[all_data.t_dat <= date]
     test = all_data.loc[all_data.t_dat > date]
     return train, test
@@ -52,7 +59,8 @@ def apk(y_true, y_pred, k):
 
 def get_y_true(users, df):
     dct = {i:[] for i in users}
-    for k, v in df[['customer_id', 'article_id']].groupby(['customer_id', 'article_id']).size().items():
+    for k, v in df[['customer_id', 'article_id']].groupby(['customer_id', 
+                                                           'article_id']).size().items():
         for _ in range(v):
             dct[k[0]].append(k[1])
     return dct

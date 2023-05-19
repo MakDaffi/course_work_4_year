@@ -4,9 +4,30 @@ from baseline import recommend_popular
 
 def recommend_popular_with_rules(train, n=12):
     recommend = {
-        0.0: [[i for i, _ in train.loc[(train['sex_y'] == 0) & ((train['target_age_groupe'] == 0) | (train['target_age_groupe'] == 1))].groupby('article_id').size().nlargest(n).items()], [i for i, _ in train.loc[(train['sex_y'] == 0) & ((train['target_age_groupe'] == 2) | (train['target_age_groupe'] == 3))].groupby('article_id').size().nlargest(n).items()]], 
-        1.0: [[i for i, _ in train.loc[(train['sex_y'] == 1) & ((train['target_age_groupe'] == 0) | (train['target_age_groupe'] == 1))].groupby('article_id').size().nlargest(n).items()], [i for i, _ in train.loc[(train['sex_y'] == 1) & ((train['target_age_groupe'] == 2) | (train['target_age_groupe'] == 3))].groupby('article_id').size().nlargest(n).items()]], 
-        0.5: [[i for i, _ in train.loc[(train['sex_y'] == 3) & ((train['target_age_groupe'] == 0) | (train['target_age_groupe'] == 1))].groupby('article_id').size().nlargest(n).items()], [i for i, _ in train.loc[(train['sex_y'] == 3) & ((train['target_age_groupe'] == 2) | (train['target_age_groupe'] == 3))].groupby('article_id').size().nlargest(n).items()]]
+        0.0: [[i for i, _ in train.loc[(train['sex_y'] == 0) & 
+                                       ((train['target_age_groupe'] == 0) | 
+                                        (train['target_age_groupe'] == 1))]\
+                                            .groupby('article_id').size().nlargest(n).items()], 
+              [i for i, _ in train.loc[(train['sex_y'] == 0) & 
+                                       ((train['target_age_groupe'] == 2) | 
+                                        (train['target_age_groupe'] == 3))]\
+                                            .groupby('article_id').size().nlargest(n).items()]], 
+        1.0: [[i for i, _ in train.loc[(train['sex_y'] == 1) & 
+                                       ((train['target_age_groupe'] == 0) | 
+                                        (train['target_age_groupe'] == 1))]\
+                                            .groupby('article_id').size().nlargest(n).items()],
+              [i for i, _ in train.loc[(train['sex_y'] == 1) & 
+                                       ((train['target_age_groupe'] == 2) | 
+                                        (train['target_age_groupe'] == 3))]\
+                                            .groupby('article_id').size().nlargest(n).items()]], 
+        0.5: [[i for i, _ in train.loc[(train['sex_y'] == 3) & 
+                                       ((train['target_age_groupe'] == 0) | 
+                                        (train['target_age_groupe'] == 1))]\
+                                            .groupby('article_id').size().nlargest(n).items()],
+              [i for i, _ in train.loc[(train['sex_y'] == 3) & 
+                                       ((train['target_age_groupe'] == 2) | 
+                                        (train['target_age_groupe'] == 3))]\
+                                            .groupby('article_id').size().nlargest(n).items()]]
     }
     return recommend
 
