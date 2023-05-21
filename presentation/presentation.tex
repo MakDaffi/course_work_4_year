@@ -6,28 +6,41 @@
 \usepackage{wrapfig}
 \usepackage{graphicx}
 \usepackage{multirow}
-\graphicspath{ {./images/} }
+\usepackage{subcaption}
+\graphicspath{ {./pic/} }
 
 \usetheme{Madrid}
 
-\title{Исследование моделей рекомендательных систем}
-\author[Окуньков С.В.]{Окуньков Сергей Викторович}
-\institute[СГУ]{Саратовский Государственный Университет}
-\date{22 мая 2023 г.}
+\title[Исследование моделей РС]
+{Исследование моделей рекомендательных систем}
+\author{Курсовая работа \\
+    студента 431 группы С.~В.~Окунькова}
+\institute{{Саратовский государственный университет} \\
+    им.~Н.~Г.~Чернышевского \\[5pt]
+Кафедра теоретических основ \\ компьютерной безопасности и криптографии \\[5pt]
+Научный руководитель: доцент Слеповичев~И.~И.
+}
+\date{22 мая 2023г.}
+
 
 \begin{document}
 
 \maketitle
 
 \begin{frame}{Содержание}
-  1. Актуальность темы. \\
-  2. Цель работы. \\
-  3. Виды рекомендательных систем. \\
-  4. Описание набора данных. \\
-  5. Анализ данных. \\
-  6. Используемые модели. \\
-  7. Результаты обучения моделей. \\
-  8. Выводы. \\
+  \begin{enumerate}
+    \item Актуальность темы.
+    \item Цель работы.
+    \item Виды рекомендательных систем.
+    \item Описание набора данных.
+    \item План работы.
+    \item Используемые инструменты.
+    \item Анализ данных.
+    \item Используемые модели.
+    \item Результаты обучения моделей.
+    \item Выводы.
+    \item Список используемых источников.
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}{Акутальность темы}
@@ -40,20 +53,14 @@
 \end{frame}
 
 \begin{frame}{Цель работы}
-  Целью данной работы является изучение современных подходов к построению рекомендаций. Выявление их плюсов и минусов,
+  Целью данной работы является изучение современных подходов к построению рекомендательных систем. Выявление их плюсов и минусов,
   а также создание такой системы, которая будет выдавать лучшие результаты, с помощью средств, доступных обычному
   разработчику.
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{pic/1}
+    \includegraphics[width=0.3\textwidth]{1}
     \label{fig:img1}
   \end{figure}
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    {\Huge \textbf{Виды рекомендательных систем}}
-  \end{center}
 \end{frame}
 
 \begin{frame}{Виды рекомендательных систем}
@@ -75,7 +82,7 @@
 \begin{frame}{Контентная фильтрация}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{pic/2}
+    \includegraphics[width=0.8\textwidth]{2}
     \label{fig:img1}
   \end{figure}  
 \end{frame}
@@ -83,7 +90,7 @@
 \begin{frame}{Коллаборативная фильтрация}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{pic/3}
+    \includegraphics[width=0.8\textwidth]{3}
     \label{fig:img1}
   \end{figure}  
 \end{frame}
@@ -91,15 +98,9 @@
 \begin{frame}{Гибридная фильтрация}
   \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pic/4}
+    \includegraphics[width=0.7\textwidth]{4}
     \label{fig:img1}
   \end{figure}  
-\end{frame}
-
-\begin{frame}
-  \begin{center}
-    {\Huge \textbf{Практическая часть}}
-  \end{center}  
 \end{frame}
 
 \begin{frame}{Описание набора данных}
@@ -108,8 +109,66 @@
   содержащую в себе признаки 105542 товаров магазина, и таблицу взаимодействий (transactions.csv), содержащую в себе факты покупки товаров пользователями.  
 \end{frame}
 
+\begin{frame}{План работы}
+  \begin{enumerate}
+    \item Анализ и предобработка данных. Создание новых признаков.
+    \item Исследование области рекомендательных систем и выбор алгоритмов машинного обучения.
+    \item Обучение моделей и подбор оптимальных гиперпараметов для них.
+    \item Оценка качества алгоритмов и анализ результатов.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Используемые инструменты}
+  В качестве языка программирования для данной работы был выбран Python 3.10.10, т.к. он является
+  практически безальтернативным решением для работы с машинным обучением.
+  
+  Для проведения экспериментов с моделями и анализ данных была использована платформа Jupyter Notebook.
+
+  Для визуализации, анализа и предобработки данных были использованы библиотеки matplotlib, seaborn и pandas.
+
+  Для работы с моделями были использованы библиотеки implicit и LightFM, которые содержат модели для построения рекомендательных систем разных типов.
+\end{frame}
+
 \begin{frame}{Анализ данных}
-  ???
+  \begin{figure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{6}
+      \label{fig:sfig1}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{7}
+      \label{fig:sfig2}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{8}
+      \label{fig:sfig3}
+    \end{subfigure}
+    \label{fig:fig}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Анализ данных}
+  \begin{figure}
+    \begin{subfigure}{.4\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{9}
+      \label{fig:sfig1}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{10}
+      \label{fig:sfig2}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.8\linewidth]{11}
+      \label{fig:sfig3}
+    \end{subfigure}
+    \label{fig:fig}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Используемые модели}
@@ -168,12 +227,41 @@
 \end{enumerate}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Внимание!}
-
-  \begin{center}
-    {\Huge \textbf{Спасибо за внимание!}}
-  \end{center}
+\begin{frame}{Список использованных источников}
+  \begin{enumerate}
+    \item Нейронные сети для начинающих. Часть 1 [Электронный ресурс] – URL: https://habr.com/ru/post/312450/ (дата обращения 13.05.2022) - Загл. с экрана. Яз. рус.
+    \item Verma Y. <<A Guide to Building Hybrid Recommendation Systems for Beginners>> [Электронный ресурс] – URL: https://analyticsindiamag.com/a-guide-to-building-hybrid-recommendation-systems-for-beginners/ (дата обращения 01.05.2023) - Загл. с экрана. Яз. англ.
+    \item Ермилов Д. <<Рекомендательные системы: продвинутые алгоритмы>> [Электронный ресурс] – URL: https://www.bigdataschool.ru/blog/recommender-systems-advanced-algorithms.html (дата обращения 01.05.2023) - Загл. с экрана. Яз. рус.
+  \end{enumerate} 
 \end{frame}
+
+\begin{frame}
+  \begin{enumerate}
+    \setcounter{enumi}{3}
+    \item Коллаборативная фильтрация простыми словами [Электронный ресурс] – URL: https://lala.lanbook.com/kollaborativnaya-filtraciya-prostymi-slovami (дата обращения 01.05.2023) - Загл. с экрана. Яз. рус.
+    \item Метрики качества ранжирования [Электронный ресурс] – URL: https://habr.com/ru/companies/econtenta/articles/303458/ (дата обращения 01.05.2023) - Загл. с экрана. Яз. рус.
+    \item Pykes K. <<Normalized Discounted Cumulative Gain>> [Электронный ресурс] – URL: https://towardsdatascience.com/normalized-discounted-cumulative-gain-37e6f75090e9 (дата обращения 01.05.2023) - Загл. с экрана. Яз. англ.
+    \item Park M., Lee K. <<Exploiting Negative Preference in Content-based Music Recommendation with Contrastive Learning>> [Статья] Яз. англ.
+    \item Recommendation system with content based filtering [Электронный ресурс] – URL: https://www.slideteam.net/recommendation-system-with-content-based-filtering.html (дата обращения 01.05.2023) - Загл. с экрана. Яз. англ.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \begin{enumerate}
+    \setcounter{enumi}{8}
+    \item Building a hybrid recommendation system for Jokes recommendations [Электронный ресурс] – URL: https://www.oreilly.com/library/view/advanced-machine-learning/9781838641771/0aa25981-d582-4347-9928-2d967133822e.xhtml (дата обращения 01.05.2023) - Загл. с экрана. Яз. англ.
+    \item Документация matplotlib [Электронный ресурс] – URL: https://matplotlib.org (дата обращения 12.05.2022) Яз. англ.
+    \item Документация seaborn [Электронный ресурс] – URL: https://seaborn.pydata.org (дата обращения 12.05.2022) Яз. англ.
+    \item Документация pandas [Электронный ресурс] – URL: https://pandas.pydata.org (дата обращения 12.05.2022) Яз. англ.
+    \item Документация implicit [Электронный ресурс] – URL: https://implicit.readthedocs.io/en/latest/quickstart.html (дата обращения 12.05.2022) Яз. англ.
+    \item Документация LightFM [Электронный ресурс] – URL: https://making.lyst.com/lightfm/docs/home.html (дата обращения 12.05.2022) Яз. англ.
+  \end{enumerate}
+\end{frame}
+
+  \begin{frame}
+    \begin{beamercolorbox}[ht=7ex, dp=4ex, center, shadow=true, rounded=true]{title in head/foot}
+    \centerline{\LARGE{СПАСИБО ЗА ВНИМАНИЕ!}}
+    \end{beamercolorbox}
+  \end{frame}
 
 \end{document}
